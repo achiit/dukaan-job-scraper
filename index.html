@@ -8,17 +8,17 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --black: #0a0a0a;
+      --black:    #0a0a0a;
       --gray-900: #111;
       --gray-700: #333;
       --gray-500: #666;
-      --gray-300: #ccc;
-      --gray-100: #f5f5f5;
-      --white: #fff;
-      --border: #e0e0e0;
+      --gray-400: #999;
+      --gray-200: #e8e8e8;
+      --gray-100: #f4f4f4;
+      --white:    #fff;
     }
 
-    html { font-size: 16px; }
+    html { font-size: 15px; }
 
     body {
       font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -31,114 +31,243 @@
 
     /* ── Layout ── */
     .page {
-      max-width: 860px;
+      max-width: 900px;
       margin: 0 auto;
-      padding: 80px 40px 120px;
+      padding: 72px 40px 120px;
     }
 
     /* ── Header ── */
     .doc-header {
       border-bottom: 2px solid var(--black);
-      padding-bottom: 28px;
-      margin-bottom: 56px;
+      padding-bottom: 32px;
+      margin-bottom: 60px;
     }
-
-    .doc-header .eyebrow {
-      font-size: 11px;
+    .eyebrow {
+      font-size: 10.5px;
       font-weight: 700;
-      letter-spacing: 0.14em;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
       color: var(--gray-500);
-      margin-bottom: 10px;
-    }
-
-    .doc-header h1 {
-      font-size: 32px;
-      font-weight: 700;
-      letter-spacing: -0.5px;
-      color: var(--black);
-      line-height: 1.2;
       margin-bottom: 12px;
     }
-
+    .doc-header h1 {
+      font-size: 34px;
+      font-weight: 700;
+      letter-spacing: -0.6px;
+      color: var(--black);
+      line-height: 1.15;
+      margin-bottom: 12px;
+    }
     .doc-header .subtitle {
-      font-size: 15px;
+      font-size: 14.5px;
       color: var(--gray-500);
+      max-width: 560px;
+      line-height: 1.6;
     }
-
-    .meta-row {
-      display: flex;
-      gap: 32px;
-      margin-top: 20px;
-      flex-wrap: wrap;
+    .meta-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 0;
+      margin-top: 28px;
+      border: 1px solid var(--gray-200);
     }
-
-    .meta-item {
-      font-size: 12px;
-      color: var(--gray-500);
+    .meta-cell {
+      padding: 14px 18px;
+      border-right: 1px solid var(--gray-200);
+      border-bottom: 1px solid var(--gray-200);
     }
-
-    .meta-item strong {
-      color: var(--gray-700);
+    .meta-cell:last-child { border-right: none; }
+    .meta-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gray-400);
+      margin-bottom: 3px;
+    }
+    .meta-val {
+      font-size: 13.5px;
       font-weight: 600;
+      color: var(--black);
     }
 
-    /* ── Sections ── */
-    section {
-      margin-bottom: 56px;
-    }
+    /* ── Section headings ── */
+    section { margin-bottom: 60px; }
 
     h2 {
-      font-size: 11px;
+      font-size: 10px;
       font-weight: 700;
-      letter-spacing: 0.14em;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
       color: var(--gray-500);
-      border-bottom: 1px solid var(--border);
-      padding-bottom: 8px;
-      margin-bottom: 24px;
+      border-bottom: 1px solid var(--gray-200);
+      padding-bottom: 9px;
+      margin-bottom: 26px;
     }
-
     h3 {
-      font-size: 15px;
+      font-size: 14.5px;
       font-weight: 700;
       color: var(--black);
-      margin-bottom: 8px;
-      margin-top: 24px;
+      margin-top: 28px;
+      margin-bottom: 10px;
     }
-
     h3:first-child { margin-top: 0; }
 
     p {
-      font-size: 14px;
+      font-size: 13.5px;
       color: var(--gray-700);
       margin-bottom: 12px;
+      max-width: 680px;
     }
 
-    /* ── Status badges ── */
-    .status {
-      display: inline-block;
+    /* ── KPI grid ── */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--gray-200);
+      border: 1px solid var(--gray-200);
+      margin-bottom: 28px;
+    }
+    @media (max-width: 640px) { .kpi-grid { grid-template-columns: 1fr 1fr; } }
+    .kpi {
+      background: var(--white);
+      padding: 20px 20px 18px;
+    }
+    .kpi-label {
       font-size: 10px;
       font-weight: 700;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
-      padding: 3px 8px;
-      border-radius: 3px;
-      vertical-align: middle;
+      color: var(--gray-400);
+      margin-bottom: 6px;
+    }
+    .kpi-value {
+      font-size: 26px;
+      font-weight: 700;
+      letter-spacing: -0.8px;
+      color: var(--black);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .kpi-sub {
+      font-size: 11.5px;
+      color: var(--gray-500);
     }
 
-    .status-ok    { background: var(--black); color: var(--white); }
-    .status-warn  { background: var(--gray-300); color: var(--gray-700); }
-    .status-issue { border: 1.5px solid var(--black); color: var(--black); background: var(--white); }
+    /* ── Source cards ── */
+    .source-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    @media (max-width: 580px) { .source-grid { grid-template-columns: 1fr; } }
+    .source-card {
+      border: 1px solid var(--gray-200);
+      padding: 22px 22px 20px;
+    }
+    .source-card-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+    .source-name {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--black);
+    }
+    .source-type {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gray-500);
+      margin-top: 2px;
+    }
+    .source-count-big {
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -1px;
+      color: var(--black);
+      line-height: 1;
+    }
+    .source-pct {
+      font-size: 11px;
+      color: var(--gray-500);
+      margin-top: 2px;
+      text-align: right;
+    }
+    .source-sites {
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px solid var(--gray-200);
+    }
+    .source-sites-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gray-400);
+      margin-bottom: 10px;
+    }
+    .site-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+      color: var(--gray-700);
+      padding: 4px 0;
+      border-bottom: 1px solid var(--gray-100);
+    }
+    .site-row:last-child { border-bottom: none; }
+    .site-row-name { font-weight: 600; color: var(--black); }
+    .site-row-count { color: var(--gray-500); font-variant-numeric: tabular-nums; }
 
-    /* ── Data table ── */
+    /* ── Bar chart ── */
+    .bar-table { width: 100%; margin: 4px 0 16px; }
+    .bar-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 9px;
+    }
+    .bar-label {
+      font-size: 12px;
+      color: var(--gray-700);
+      width: 130px;
+      flex-shrink: 0;
+      font-weight: 500;
+    }
+    .bar-track {
+      flex: 1;
+      height: 8px;
+      background: var(--gray-100);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    .bar-fill {
+      height: 100%;
+      background: var(--black);
+      border-radius: 2px;
+    }
+    .bar-val {
+      font-size: 11.5px;
+      color: var(--gray-500);
+      width: 60px;
+      text-align: right;
+      flex-shrink: 0;
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* ── Standard table ── */
     table {
       width: 100%;
       border-collapse: collapse;
-      font-size: 13.5px;
-      margin-bottom: 12px;
+      font-size: 13px;
+      margin-bottom: 16px;
     }
-
     thead th {
       font-size: 10px;
       font-weight: 700;
@@ -149,444 +278,693 @@
       padding: 0 12px 10px 0;
       text-align: left;
     }
-
-    tbody tr {
-      border-bottom: 1px solid var(--border);
-    }
-
+    tbody tr { border-bottom: 1px solid var(--gray-200); }
     tbody tr:last-child { border-bottom: none; }
-
     tbody td {
-      padding: 11px 12px 11px 0;
+      padding: 10px 12px 10px 0;
       color: var(--gray-700);
       vertical-align: top;
     }
+    tbody td:first-child { font-weight: 600; color: var(--black); }
 
-    tbody td:first-child {
-      font-weight: 600;
-      color: var(--black);
-      white-space: nowrap;
+    /* ── Badge ── */
+    .badge {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 2px;
     }
+    .badge-solid   { background: var(--black); color: var(--white); }
+    .badge-outline { border: 1.5px solid var(--black); color: var(--black); }
+    .badge-muted   { background: var(--gray-200); color: var(--gray-700); }
 
     /* ── Code ── */
     code {
       font-family: "SF Mono", "Fira Code", "Courier New", monospace;
-      font-size: 12px;
+      font-size: 11.5px;
       background: var(--gray-100);
-      border: 1px solid var(--border);
+      border: 1px solid var(--gray-200);
       padding: 2px 6px;
-      border-radius: 3px;
+      border-radius: 2px;
       color: var(--black);
     }
-
     pre {
       background: var(--gray-100);
-      border: 1px solid var(--border);
+      border: 1px solid var(--gray-200);
       border-left: 3px solid var(--black);
       padding: 18px 20px;
-      border-radius: 0 4px 4px 0;
       overflow-x: auto;
-      margin: 16px 0;
+      margin: 14px 0 20px;
     }
-
     pre code {
       background: none;
       border: none;
       padding: 0;
-      font-size: 12.5px;
-      line-height: 1.7;
+      font-size: 12px;
+      line-height: 1.75;
       color: var(--gray-900);
     }
 
     /* ── Flow diagram ── */
     .flow {
-      border: 1px solid var(--border);
+      border: 1px solid var(--gray-200);
       border-left: 3px solid var(--black);
       padding: 20px 24px;
       background: var(--gray-100);
       font-family: "SF Mono", "Fira Code", "Courier New", monospace;
       font-size: 12px;
-      line-height: 2;
+      line-height: 1.9;
       color: var(--gray-700);
-      margin: 16px 0;
+      margin: 16px 0 24px;
     }
+    .flow .hl { color: var(--black); font-weight: 700; }
+    .flow .dim { color: var(--gray-400); }
 
-    .flow .highlight { color: var(--black); font-weight: 700; }
-
-    /* ── Info cards ── */
-    .cards {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-      margin: 16px 0;
-    }
-
-    @media (max-width: 600px) { .cards { grid-template-columns: 1fr; } }
-
-    .card {
-      border: 1px solid var(--border);
-      padding: 20px;
-    }
-
-    .card-label {
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--gray-500);
-      margin-bottom: 6px;
-    }
-
-    .card-value {
-      font-size: 22px;
-      font-weight: 700;
-      color: var(--black);
-      letter-spacing: -0.5px;
-      line-height: 1;
-    }
-
-    .card-sub {
-      font-size: 12px;
-      color: var(--gray-500);
-      margin-top: 4px;
-    }
-
-    /* ── PM2 table ── */
-    .pm2-row td:nth-child(3) { font-family: "SF Mono", "Fira Code", monospace; font-size: 11.5px; }
-
-    /* ── Alert box ── */
+    /* ── Alert ── */
     .alert {
-      border: 1.5px solid var(--black);
+      border: 1px solid var(--gray-200);
+      border-left: 3px solid var(--black);
       padding: 16px 20px;
-      margin: 16px 0;
+      margin: 14px 0;
       display: flex;
       gap: 14px;
-      align-items: flex-start;
     }
+    .alert-warn { border-left-color: var(--black); }
+    .alert-icon { font-size: 15px; flex-shrink: 0; padding-top: 1px; }
+    .alert-body { font-size: 13px; color: var(--gray-700); line-height: 1.6; }
+    .alert-body strong { color: var(--black); display: block; margin-bottom: 3px; }
 
-    .alert-icon {
-      font-size: 16px;
-      line-height: 1.4;
-      flex-shrink: 0;
+    /* ── Two col ── */
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px; }
+    @media (max-width: 600px) { .two-col { grid-template-columns: 1fr; } }
+
+    /* ── Divider ── */
+    .divider { border: none; border-top: 1px solid var(--gray-200); margin: 28px 0; }
+
+    /* ── Company list ── */
+    .company-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--gray-200);
+      border: 1px solid var(--gray-200);
+      margin-top: 8px;
     }
-
-    .alert-body { font-size: 13.5px; color: var(--gray-700); }
-    .alert-body strong { color: var(--black); }
-
-    /* ── List ── */
-    ul, ol {
-      margin-left: 20px;
-      font-size: 14px;
-      color: var(--gray-700);
-      margin-bottom: 12px;
-    }
-
-    li { margin-bottom: 4px; }
-
-    /* ── Footer ── */
-    .doc-footer {
-      border-top: 1px solid var(--border);
-      margin-top: 72px;
-      padding-top: 24px;
+    @media (max-width: 500px) { .company-grid { grid-template-columns: 1fr 1fr; } }
+    .company-cell {
+      background: var(--white);
+      padding: 11px 14px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      flex-wrap: wrap;
-      gap: 8px;
     }
+    .company-name { font-size: 12.5px; font-weight: 500; color: var(--black); }
+    .company-count { font-size: 11.5px; color: var(--gray-400); font-variant-numeric: tabular-nums; }
 
-    .doc-footer p {
-      font-size: 12px;
+    /* ── Footer ── */
+    .doc-footer {
+      border-top: 1px solid var(--gray-200);
+      margin-top: 80px;
+      padding-top: 22px;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .doc-footer p { font-size: 11.5px; color: var(--gray-400); margin: 0; }
+
+    /* ── TOC ── */
+    .toc {
+      border: 1px solid var(--gray-200);
+      padding: 20px 24px;
+      margin-bottom: 60px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4px 32px;
+    }
+    @media (max-width: 520px) { .toc { grid-template-columns: 1fr; } }
+    .toc-title {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
       color: var(--gray-500);
-      margin: 0;
+      margin-bottom: 14px;
+      grid-column: 1 / -1;
+    }
+    .toc a {
+      font-size: 13px;
+      color: var(--gray-700);
+      text-decoration: none;
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+      padding: 3px 0;
+    }
+    .toc a:hover { color: var(--black); }
+    .toc-num {
+      font-size: 10px;
+      color: var(--gray-400);
+      font-variant-numeric: tabular-nums;
+      width: 18px;
+      flex-shrink: 0;
     }
   </style>
 </head>
 <body>
 <div class="page">
 
-  <!-- ── Header ── -->
+  <!-- ══════════════════════════════════════════
+       HEADER
+  ══════════════════════════════════════════ -->
   <header class="doc-header">
-    <div class="eyebrow">EasyHyr Backend — Technical Reference</div>
-    <h1>Job Scraper Pipeline</h1>
-    <p class="subtitle">Architecture, data sources, scheduling, and operational runbook for the automated job ingestion system.</p>
-    <div class="meta-row">
-      <div class="meta-item"><strong>Server</strong> &nbsp;43.205.129.136 (AWS EC2)</div>
-      <div class="meta-item"><strong>Last Updated</strong> &nbsp;June 9, 2026</div>
-      <div class="meta-item"><strong>Jobs in DB</strong> &nbsp;8,240</div>
-      <div class="meta-item"><strong>Oldest Record</strong> &nbsp;April 24, 2026</div>
+    <div class="eyebrow">EasyHyr Platform — Engineering Reference</div>
+    <h1>Job Ingestion Pipeline</h1>
+    <p class="subtitle">Complete technical reference covering data sources, ingestion architecture, scheduling, live database metrics, and operational procedures for the automated job scraping system.</p>
+    <div class="meta-grid">
+      <div class="meta-cell"><div class="meta-label">Server</div><div class="meta-val">43.205.129.136 (AWS EC2)</div></div>
+      <div class="meta-cell"><div class="meta-label">Total Jobs in DB</div><div class="meta-val">8,240</div></div>
+      <div class="meta-cell"><div class="meta-label">Active Sources</div><div class="meta-val">6 platforms</div></div>
+      <div class="meta-cell"><div class="meta-label">Cron Schedule</div><div class="meta-val">Every hour at :00</div></div>
+      <div class="meta-cell"><div class="meta-label">DB Range</div><div class="meta-val">Apr 24 – Jun 9, 2026</div></div>
+      <div class="meta-cell"><div class="meta-label">Document Date</div><div class="meta-val">June 9, 2026</div></div>
     </div>
   </header>
 
 
-  <!-- ── Stats ── -->
-  <section>
-    <h2>Current Database State</h2>
-    <div class="cards">
-      <div class="card">
-        <div class="card-label">Total Jobs Stored</div>
-        <div class="card-value">8,240</div>
-        <div class="card-sub">Across all sources</div>
+  <!-- ══════════════════════════════════════════
+       TABLE OF CONTENTS
+  ══════════════════════════════════════════ -->
+  <nav class="toc">
+    <div class="toc-title">Contents</div>
+    <a href="#s1"><span class="toc-num">01</span> Live Database Metrics</a>
+    <a href="#s2"><span class="toc-num">02</span> Pipeline Architecture</a>
+    <a href="#s3"><span class="toc-num">03</span> Data Sources &amp; Platforms</a>
+    <a href="#s4"><span class="toc-num">04</span> Job Coverage Breakdown</a>
+    <a href="#s5"><span class="toc-num">05</span> Cron Schedule &amp; Queries</a>
+    <a href="#s6"><span class="toc-num">06</span> Data Quality</a>
+    <a href="#s7"><span class="toc-num">07</span> PM2 Process Registry</a>
+    <a href="#s8"><span class="toc-num">08</span> Infrastructure</a>
+    <a href="#s9"><span class="toc-num">09</span> Data Normalisation</a>
+    <a href="#s10"><span class="toc-num">10</span> Operational Runbook</a>
+    <a href="#s11"><span class="toc-num">11</span> Known Issues</a>
+    <a href="#s12"><span class="toc-num">12</span> File Reference</a>
+  </nav>
+
+
+  <!-- ══════════════════════════════════════════
+       01 — LIVE DB METRICS
+  ══════════════════════════════════════════ -->
+  <section id="s1">
+    <h2>01 &nbsp; Live Database Metrics</h2>
+    <p>Figures reflect the live PostgreSQL database as of June 9, 2026 at 14:18 UTC, immediately after the first successful scraper run following the pipeline recovery.</p>
+
+    <div class="kpi-grid">
+      <div class="kpi">
+        <div class="kpi-label">Total Jobs</div>
+        <div class="kpi-value">8,240</div>
+        <div class="kpi-sub">All sources combined</div>
       </div>
-      <div class="card">
-        <div class="card-label">Latest Ingestion</div>
-        <div class="card-value">June 9</div>
-        <div class="card-sub">2026-06-09 at 14:18 UTC</div>
+      <div class="kpi">
+        <div class="kpi-label">Added Last 24 h</div>
+        <div class="kpi-value">200</div>
+        <div class="kpi-sub">Scraper only (JSearch down)</div>
       </div>
-      <div class="card">
-        <div class="card-label">Data Range</div>
-        <div class="card-value">47 days</div>
-        <div class="card-sub">Apr 24 – Jun 9, 2026</div>
+      <div class="kpi">
+        <div class="kpi-label">With Salary Data</div>
+        <div class="kpi-value">2,900</div>
+        <div class="kpi-sub">35.2% of total</div>
       </div>
-      <div class="card">
-        <div class="card-label">Cron Frequency</div>
-        <div class="card-value">Hourly</div>
-        <div class="card-sub">Every hour at :00</div>
+      <div class="kpi">
+        <div class="kpi-label">With Description</div>
+        <div class="kpi-value">6,946</div>
+        <div class="kpi-sub">84.3% of total</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">Remote Jobs</div>
+        <div class="kpi-value">990</div>
+        <div class="kpi-sub">12% of total</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">On-site Jobs</div>
+        <div class="kpi-value">7,250</div>
+        <div class="kpi-sub">88% of total</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">Date Range</div>
+        <div class="kpi-value">47 days</div>
+        <div class="kpi-sub">Apr 24 – Jun 9, 2026</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">Active Sources</div>
+        <div class="kpi-value">6</div>
+        <div class="kpi-sub">Indeed, LinkedIn, Google, Glassdoor, ZipRecruiter, JSearch</div>
       </div>
     </div>
   </section>
 
 
-  <!-- ── Architecture ── -->
-  <section>
-    <h2>Architecture Overview</h2>
-    <p>The pipeline consists of three independent processes managed by PM2. The main backend cron schedules work into a BullMQ queue backed by Redis. The worker dequeues jobs and calls both data sources in parallel.</p>
+  <!-- ══════════════════════════════════════════
+       02 — ARCHITECTURE
+  ══════════════════════════════════════════ -->
+  <section id="s2">
+    <h2>02 &nbsp; Pipeline Architecture</h2>
+    <p>Three PM2 processes work together. The main backend cron fires every hour and pushes three BullMQ jobs into Redis. The worker dequeues them and calls both data sources independently — a failure in one does not abort the other.</p>
 
     <div class="flow">
-<span class="highlight">easyhyr-backend</span>  (PM2 id:0, port 3000)
-  └─ node-cron  »  fires at <span class="highlight">0 * * * *</span>  (every hour, minute zero)
-       └─ addJobToQueue( query, "United States" )  ×3 queries
-            └─ BullMQ  »  <span class="highlight">job-fetch-queue</span>  (Redis 127.0.0.1:6379)
+<span class="hl">easyhyr-backend</span>  <span class="dim">(PM2 #0, port 3000)</span>
+  └─ <span class="hl">node-cron</span>  ›  fires at <span class="hl">0 * * * *</span>  <span class="dim">(every hour, minute :00, UTC)</span>
+       └─ addJobToQueue( query, "United States" )  <span class="dim">× 3 queries per cycle</span>
+            └─ <span class="hl">BullMQ</span>  ›  queue: <span class="hl">job-fetch-queue</span>  <span class="dim">(Redis 127.0.0.1:6379)</span>
 
-<span class="highlight">jsearch-worker</span>  (PM2 id:1)
-  └─ BullMQ Worker  »  dequeues jobs
-       ├─ [A]  JSearch API  (RapidAPI, HTTPS)
-       │        └─ on 429 / failure  »  log warning, continue ↓
-       └─ [B]  <span class="highlight">jobspy-scraper</span>  (PM2 id:2, localhost:8001)
-                └─ jobspy  »  scrape Indeed · Google · LinkedIn · Glassdoor · ZipRecruiter
-                     └─ normalize  »  saveJobsToDB  (PostgreSQL)
+<span class="hl">jsearch-worker</span>  <span class="dim">(PM2 #1)</span>
+  └─ BullMQ Worker  ›  dequeues each job
+       │
+       ├─ <span class="hl">Source A — JSearch API</span>  <span class="dim">(RapidAPI, HTTPS external)</span>
+       │    └─ on 429 / error  ›  log warning, continue  <span class="dim">(does not abort)</span>
+       │
+       └─ <span class="hl">Source B — JobSpy Scraper</span>  <span class="dim">(PM2 #2, localhost:8001)</span>
+            └─ jobspy  ›  Indeed · LinkedIn · Google · Glassdoor · ZipRecruiter
+                 │
+                 ├─ <span class="hl">JobNormalizer</span>  ›  unify field names from both sources
+                 └─ <span class="hl">JobStorage</span>  ›  upsert into PostgreSQL  <span class="dim">(dedup by apply_link)</span>
     </div>
   </section>
 
 
-  <!-- ── Data Sources ── -->
-  <section>
-    <h2>Data Sources</h2>
+  <!-- ══════════════════════════════════════════
+       03 — DATA SOURCES & PLATFORMS
+  ══════════════════════════════════════════ -->
+  <section id="s3">
+    <h2>03 &nbsp; Data Sources &amp; Platforms</h2>
+    <p>Jobs are ingested from two pipeline sources which themselves aggregate across six distinct job platforms.</p>
 
-    <h3>Source A — JSearch API (RapidAPI) &nbsp;<span class="status status-issue">Rate Limited</span></h3>
-    <p>Programmatic job search API aggregating data from multiple job boards. Called via HTTPS on each worker dequeue.</p>
-    <table>
-      <thead><tr><th>Parameter</th><th>Value</th><th>Notes</th></tr></thead>
-      <tbody>
-        <tr><td>Endpoint</td><td><code>https://jsearch.p.rapidapi.com/search</code></td><td>RapidAPI hosted</td></tr>
-        <tr><td>Auth</td><td><code>RAPID_API_KEY</code> env var</td><td>Set in <code>.env</code> on server</td></tr>
-        <tr><td>Pages per call</td><td><code>num_pages=20</code></td><td>Up to ~200 results</td></tr>
-        <tr><td>Current status</td><td>429 Too Many Requests</td><td>Monthly quota exhausted — needs RapidAPI plan renewal</td></tr>
-        <tr><td>Failure behaviour</td><td>Logs warning, continues to Source B</td><td>Does not abort the pipeline</td></tr>
-      </tbody>
-    </table>
+    <div class="source-grid">
+      <!-- Source A -->
+      <div class="source-card">
+        <div class="source-card-header">
+          <div>
+            <div class="source-name">JSearch API</div>
+            <div class="source-type">Source A — External API &nbsp;<span class="badge badge-outline">Rate Limited</span></div>
+          </div>
+          <div style="text-align:right">
+            <div class="source-count-big">3,530</div>
+            <div class="source-pct">42.8% of total</div>
+          </div>
+        </div>
+        <p style="font-size:12.5px; color:var(--gray-500); margin:0 0 12px; max-width:none;">Programmatic REST API hosted on RapidAPI. Aggregates listings from multiple boards and normalises them into a unified schema. Currently hitting monthly quota limit (HTTP 429).</p>
+        <div class="source-sites">
+          <div class="source-sites-label">Underlying Platforms</div>
+          <div class="site-row"><span class="site-row-name">Multiple boards</span><span class="site-row-count">Aggregated — no per-site split</span></div>
+          <div class="site-row"><span class="site-row-name">Auth</span><span class="site-row-count"><code>RAPID_API_KEY</code> env var</span></div>
+          <div class="site-row"><span class="site-row-name">Results per call</span><span class="site-row-count">Up to ~200 (20 pages)</span></div>
+        </div>
+      </div>
 
-    <h3>Source B — JobSpy Scraper (Python / FastAPI) &nbsp;<span class="status status-ok">Online</span></h3>
-    <p>Local FastAPI service running <code>jobspy</code>. Scrapes live listings from five major job boards per request.</p>
+      <!-- Source B -->
+      <div class="source-card">
+        <div class="source-card-header">
+          <div>
+            <div class="source-name">JobSpy Scraper</div>
+            <div class="source-type">Source B — Python FastAPI &nbsp;<span class="badge badge-solid">Online</span></div>
+          </div>
+          <div style="text-align:right">
+            <div class="source-count-big">4,710</div>
+            <div class="source-pct">57.2% of total</div>
+          </div>
+        </div>
+        <p style="font-size:12.5px; color:var(--gray-500); margin:0 0 12px; max-width:none;">Local FastAPI service using the open-source <code>jobspy</code> library. Scrapes live listings directly from five job boards per request. Runs at <code>localhost:8001</code>.</p>
+        <div class="source-sites">
+          <div class="source-sites-label">Platforms Scraped Per Request</div>
+          <div class="site-row"><span class="site-row-name">Indeed</span><span class="site-row-count">3,416 jobs &nbsp;(72.6% of scraper)</span></div>
+          <div class="site-row"><span class="site-row-name">LinkedIn</span><span class="site-row-count">1,294 jobs &nbsp;(27.4% of scraper)</span></div>
+          <div class="site-row"><span class="site-row-name">Google Jobs</span><span class="site-row-count">Configured — low yield currently</span></div>
+          <div class="site-row"><span class="site-row-name">Glassdoor</span><span class="site-row-count">Configured — low yield currently</span></div>
+          <div class="site-row"><span class="site-row-name">ZipRecruiter</span><span class="site-row-count">Configured — low yield currently</span></div>
+        </div>
+      </div>
+    </div>
+
+    <h3>Platform Configuration (JobSpy)</h3>
+    <p>All five platforms are passed to jobspy in every scrape call. Yield varies by platform depending on rate limiting and HTML structure at time of scrape.</p>
     <table>
-      <thead><tr><th>Parameter</th><th>Value</th><th>Notes</th></tr></thead>
+      <thead><tr><th>Platform</th><th>Library Support</th><th>Auth Required</th><th>Jobs Indexed (in DB)</th><th>ID Prefix</th></tr></thead>
       <tbody>
-        <tr><td>Endpoint</td><td><code>http://localhost:8001/scrape</code></td><td>Internal only</td></tr>
-        <tr><td>Sites scraped</td><td>Indeed, Google, LinkedIn, Glassdoor, ZipRecruiter</td><td>All five per call</td></tr>
-        <tr><td>Results wanted</td><td><code>100</code> per site</td><td>Max ~500 jobs per query call</td></tr>
-        <tr><td>Hours old filter</td><td><code>72</code> hours</td><td>Only jobs posted in last 3 days</td></tr>
-        <tr><td>Response time</td><td>~30–60 seconds</td><td>Axios timeout set to 300s (5 min)</td></tr>
-        <tr><td>Auth</td><td>None</td><td>Internal service, not exposed publicly</td></tr>
+        <tr><td>Indeed</td><td>Native</td><td>No</td><td>3,416</td><td><code>in-</code></td></tr>
+        <tr><td>LinkedIn</td><td>Native</td><td>No (public scrape)</td><td>1,294</td><td><code>li-</code></td></tr>
+        <tr><td>Google Jobs</td><td>Native</td><td>No</td><td>Low / 0</td><td><code>go-</code></td></tr>
+        <tr><td>Glassdoor</td><td>Native</td><td>No</td><td>Low / 0</td><td><code>gd-</code></td></tr>
+        <tr><td>ZipRecruiter</td><td>Native</td><td>No</td><td>Low / 0</td><td><code>zi-</code></td></tr>
+        <tr><td>JSearch (API)</td><td>REST API</td><td>RapidAPI key</td><td>3,530</td><td>Base64 hash</td></tr>
       </tbody>
     </table>
   </section>
 
 
-  <!-- ── Scheduling ── -->
-  <section>
-    <h2>Scheduling &amp; Queries</h2>
-    <p>The cron job in <code>src/cron/job.cron.ts</code> runs three queries per cycle. Each query is pushed as a separate BullMQ job, processed independently by the worker.</p>
+  <!-- ══════════════════════════════════════════
+       04 — COVERAGE BREAKDOWN
+  ══════════════════════════════════════════ -->
+  <section id="s4">
+    <h2>04 &nbsp; Job Coverage Breakdown</h2>
+
+    <div class="two-col">
+      <div>
+        <h3>By Pipeline Source</h3>
+        <div class="bar-row"><div class="bar-label">JobSpy Scraper</div><div class="bar-track"><div class="bar-fill" style="width:57.2%"></div></div><div class="bar-val">4,710 &nbsp;57%</div></div>
+        <div class="bar-row"><div class="bar-label">JSearch API</div><div class="bar-track"><div class="bar-fill" style="width:42.8%"></div></div><div class="bar-val">3,530 &nbsp;43%</div></div>
+      </div>
+      <div>
+        <h3>By Job Board (Scraper)</h3>
+        <div class="bar-row"><div class="bar-label">Indeed</div><div class="bar-track"><div class="bar-fill" style="width:72.6%"></div></div><div class="bar-val">3,416 &nbsp;73%</div></div>
+        <div class="bar-row"><div class="bar-label">LinkedIn</div><div class="bar-track"><div class="bar-fill" style="width:27.4%"></div></div><div class="bar-val">1,294 &nbsp;27%</div></div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <div class="two-col">
+      <div>
+        <h3>By Geography</h3>
+        <div class="bar-row"><div class="bar-label">United States</div><div class="bar-track"><div class="bar-fill" style="width:38.3%"></div></div><div class="bar-val">3,156 &nbsp;38%</div></div>
+        <div class="bar-row"><div class="bar-label">Not geocoded</div><div class="bar-track"><div class="bar-fill" style="width:59.9%"></div></div><div class="bar-val">4,934 &nbsp;60%</div></div>
+        <div class="bar-row"><div class="bar-label">India</div><div class="bar-track"><div class="bar-fill" style="width:0.6%"></div></div><div class="bar-val">49 &nbsp;&lt;1%</div></div>
+        <div class="bar-row"><div class="bar-label">United Kingdom</div><div class="bar-track"><div class="bar-fill" style="width:0.6%"></div></div><div class="bar-val">47 &nbsp;&lt;1%</div></div>
+        <div class="bar-row"><div class="bar-label">Germany</div><div class="bar-track"><div class="bar-fill" style="width:0.3%"></div></div><div class="bar-val">26 &nbsp;&lt;1%</div></div>
+        <div class="bar-row"><div class="bar-label">France</div><div class="bar-track"><div class="bar-fill" style="width:0.2%"></div></div><div class="bar-val">18 &nbsp;&lt;1%</div></div>
+        <div class="bar-row"><div class="bar-label">Canada</div><div class="bar-track"><div class="bar-fill" style="width:0.1%"></div></div><div class="bar-val">10 &nbsp;&lt;1%</div></div>
+      </div>
+      <div>
+        <h3>By Work Mode</h3>
+        <div class="bar-row"><div class="bar-label">On-site</div><div class="bar-track"><div class="bar-fill" style="width:88%"></div></div><div class="bar-val">7,250 &nbsp;88%</div></div>
+        <div class="bar-row"><div class="bar-label">Remote</div><div class="bar-track"><div class="bar-fill" style="width:12%"></div></div><div class="bar-val">990 &nbsp;12%</div></div>
+
+        <h3 style="margin-top:24px">By Employment Type</h3>
+        <div class="bar-row"><div class="bar-label">Full-time</div><div class="bar-track"><div class="bar-fill" style="width:73%"></div></div><div class="bar-val">~6,006 &nbsp;73%</div></div>
+        <div class="bar-row"><div class="bar-label">Part-time</div><div class="bar-track"><div class="bar-fill" style="width:4.9%"></div></div><div class="bar-val">~400 &nbsp;5%</div></div>
+        <div class="bar-row"><div class="bar-label">Contract</div><div class="bar-track"><div class="bar-fill" style="width:4.1%"></div></div><div class="bar-val">~338 &nbsp;4%</div></div>
+        <div class="bar-row"><div class="bar-label">Internship</div><div class="bar-track"><div class="bar-fill" style="width:0.9%"></div></div><div class="bar-val">~72 &nbsp;1%</div></div>
+        <div class="bar-row"><div class="bar-label">Not specified</div><div class="bar-track"><div class="bar-fill" style="width:25%"></div></div><div class="bar-val">2,088 &nbsp;25%</div></div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <h3>Top Hiring Companies (by job volume)</h3>
+    <p>Most frequent companies in the database, ranked by number of job listings. "Unknown Company" represents records where the scraper could not extract a company name.</p>
+    <div class="company-grid">
+      <div class="company-cell"><span class="company-name">Amazon.com</span><span class="company-count">77</span></div>
+      <div class="company-cell"><span class="company-name">Google</span><span class="company-count">48</span></div>
+      <div class="company-cell"><span class="company-name">Amazon Web Services</span><span class="company-count">43</span></div>
+      <div class="company-cell"><span class="company-name">Lockheed Martin</span><span class="company-count">67</span></div>
+      <div class="company-cell"><span class="company-name">Boeing</span><span class="company-count">33</span></div>
+      <div class="company-cell"><span class="company-name">Raytheon</span><span class="company-count">31</span></div>
+      <div class="company-cell"><span class="company-name">Concentrix</span><span class="company-count">41</span></div>
+      <div class="company-cell"><span class="company-name">U.S. Navy</span><span class="company-count">33</span></div>
+      <div class="company-cell"><span class="company-name">US Dept. of Veterans Affairs</span><span class="company-count">27</span></div>
+      <div class="company-cell"><span class="company-name">NavitasPartners</span><span class="company-count">31</span></div>
+      <div class="company-cell"><span class="company-name">Jobs via Dice</span><span class="company-count">87</span></div>
+      <div class="company-cell"><span class="company-name">Commonwealth of PA</span><span class="company-count">40</span></div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════
+       05 — SCHEDULE & QUERIES
+  ══════════════════════════════════════════ -->
+  <section id="s5">
+    <h2>05 &nbsp; Cron Schedule &amp; Queries</h2>
+    <p>The cron job in <code>src/cron/job.cron.ts</code> enqueues three BullMQ jobs per cycle. Each job runs through the full pipeline (JSearch + scraper) independently.</p>
 
     <table>
-      <thead><tr><th>Query</th><th>Location</th><th>Frequency</th><th>Jobs per run (est.)</th></tr></thead>
+      <thead><tr><th>Query Term</th><th>Location</th><th>Cron Expression</th><th>UTC Fire Times</th><th>Est. Jobs / Cycle</th></tr></thead>
       <tbody>
-        <tr><td>"jobs"</td><td>United States</td><td>Every hour at :00</td><td>~100–500</td></tr>
-        <tr><td>"developer"</td><td>United States</td><td>Every hour at :00</td><td>~100–500</td></tr>
-        <tr><td>"engineer"</td><td>United States</td><td>Every hour at :00</td><td>~100–500</td></tr>
+        <tr><td>"jobs"</td><td>United States</td><td><code>0 * * * *</code></td><td>00:00, 01:00 … 23:00</td><td>~100–500</td></tr>
+        <tr><td>"developer"</td><td>United States</td><td><code>0 * * * *</code></td><td>00:00, 01:00 … 23:00</td><td>~100–500</td></tr>
+        <tr><td>"engineer"</td><td>United States</td><td><code>0 * * * *</code></td><td>00:00, 01:00 … 23:00</td><td>~100–500</td></tr>
       </tbody>
     </table>
 
-    <p>Cron expression: <code>0 * * * *</code> — fires at minute 0 of every hour (00:00, 01:00, 02:00 … UTC).</p>
+    <p>Total potential ingestion per day (scraper only, while JSearch is down): <strong>~600–4,500 new jobs</strong> depending on jobspy yield per cycle. Duplicates are silently skipped via upsert on <code>apply_link</code>.</p>
 
-    <p>To add more queries or change the location, edit <code>src/cron/job.cron.ts</code>:</p>
-    <pre><code>const QUERIES = ["jobs", "developer", "engineer"];  // add terms here
+    <p>To add queries or change the target location, edit lines 5–6 of <code>src/cron/job.cron.ts</code>:</p>
+    <pre><code>const QUERIES = ["jobs", "developer", "engineer"];  // add search terms here
 const DEFAULT_LOCATION = "United States";           // change target region here</code></pre>
+
+    <p>To add a secondary location (e.g., India), duplicate the query loop with a different location constant.</p>
   </section>
 
 
-  <!-- ── PM2 Processes ── -->
-  <section>
-    <h2>PM2 Process Registry</h2>
-    <p>All processes are managed by PM2 on the production server. The table below reflects the state as of June 9, 2026.</p>
-    <table>
-      <thead><tr><th>ID</th><th>Name</th><th>Port</th><th>Uptime</th><th>Restarts</th><th>Status</th></tr></thead>
-      <tbody class="pm2-row">
-        <tr><td>0</td><td>easyhyr-backend</td><td>3000</td><td>~7h</td><td>6</td><td><span class="status status-ok">Online</span></td></tr>
-        <tr><td>1</td><td>jsearch-worker</td><td>—</td><td>~5m</td><td>2</td><td><span class="status status-ok">Online</span></td></tr>
-        <tr><td>2</td><td>jobspy-scraper</td><td>8001</td><td>~1m</td><td>1</td><td><span class="status status-ok">Online</span></td></tr>
-        <tr><td>3</td><td>job-service</td><td>3002</td><td>6D</td><td>0</td><td><span class="status status-ok">Online</span></td></tr>
-        <tr><td>4</td><td>resume-service</td><td>3003</td><td>30h</td><td>1</td><td><span class="status status-ok">Online</span></td></tr>
-        <tr><td>5</td><td>api-gateway</td><td>—</td><td>6D</td><td>0</td><td><span class="status status-ok">Online</span></td></tr>
-        <tr><td>6</td><td>ai-service</td><td>8000</td><td>18h</td><td>9</td><td><span class="status status-ok">Online</span></td></tr>
-        <tr><td>7</td><td>match-service</td><td>8002</td><td>6D</td><td>0</td><td><span class="status status-ok">Online</span></td></tr>
-        <tr><td>9</td><td>easyhyr-frontend</td><td>3010</td><td>5h</td><td>3</td><td><span class="status status-ok">Online</span></td></tr>
-      </tbody>
-    </table>
-  </section>
+  <!-- ══════════════════════════════════════════
+       06 — DATA QUALITY
+  ══════════════════════════════════════════ -->
+  <section id="s6">
+    <h2>06 &nbsp; Data Quality</h2>
 
-
-  <!-- ── Infrastructure ── -->
-  <section>
-    <h2>Infrastructure</h2>
     <table>
-      <thead><tr><th>Component</th><th>Details</th></tr></thead>
+      <thead><tr><th>Field</th><th>Coverage</th><th>Notes</th></tr></thead>
       <tbody>
-        <tr><td>Server</td><td>AWS EC2 — 43.205.129.136 (Ubuntu)</td></tr>
-        <tr><td>Queue</td><td>BullMQ v5 — queue name <code>job-fetch-queue</code></td></tr>
-        <tr><td>Redis</td><td><code>127.0.0.1:6379</code> — managed by systemd, no auth</td></tr>
-        <tr><td>Database</td><td>PostgreSQL via Prisma ORM — table <code>jobs</code></td></tr>
-        <tr><td>Scraper runtime</td><td>Python 3.10, FastAPI, uvicorn, jobspy</td></tr>
-        <tr><td>Worker runtime</td><td>Node.js 18 — <code>dist/workers/job.worker.js</code></td></tr>
-        <tr><td>Dedup strategy</td><td><code>apply_link</code> used as unique key — duplicate URLs are skipped on insert</td></tr>
+        <tr><td>title</td><td>~100%</td><td>Required for storage — missing records are skipped</td></tr>
+        <tr><td>company</td><td>~98%</td><td>139 records show "Unknown Company"</td></tr>
+        <tr><td>apply_link</td><td>~100%</td><td>Used as unique dedup key — required</td></tr>
+        <tr><td>description</td><td>84.3% (6,946)</td><td>JSearch jobs more likely to include full description</td></tr>
+        <tr><td>salary_min / max</td><td>35.2% (2,900)</td><td>Only when employer explicitly lists salary</td></tr>
+        <tr><td>city / state</td><td>~38%</td><td>4,934 records have no geocoded country</td></tr>
+        <tr><td>is_remote</td><td>100%</td><td>Defaults to <code>false</code> when not specified</td></tr>
+        <tr><td>employment_type</td><td>~75%</td><td>2,088 null; 30+ format variants (see note below)</td></tr>
+        <tr><td>skills / tags</td><td>0%</td><td>Skill tags table is empty — no NLP extraction yet</td></tr>
       </tbody>
     </table>
-  </section>
-
-
-  <!-- ── Data Flow Detail ── -->
-  <section>
-    <h2>Data Normalisation</h2>
-    <p>Both sources return different field names. <code>JobNormalizer.service.ts</code> maps both to a unified <code>NormalizedJob</code> shape before DB insertion.</p>
-    <table>
-      <thead><tr><th>Scraper Field</th><th>JSearch Field</th><th>Normalised to</th></tr></thead>
-      <tbody>
-        <tr><td><code>title</code></td><td><code>job_title</code></td><td><code>title</code></td></tr>
-        <tr><td><code>company</code></td><td><code>employer_name</code></td><td><code>company</code></td></tr>
-        <tr><td><code>city</code></td><td><code>job_city</code></td><td><code>city</code></td></tr>
-        <tr><td><code>country</code></td><td><code>job_country</code></td><td><code>country</code></td></tr>
-        <tr><td><code>job_url</code></td><td><code>job_apply_link</code></td><td><code>apply_link</code></td></tr>
-        <tr><td><code>description</code></td><td><code>job_description</code></td><td><code>description</code></td></tr>
-        <tr><td><code>is_remote</code></td><td><code>job_is_remote</code></td><td><code>is_remote</code></td></tr>
-        <tr><td><code>job_type</code></td><td><code>job_employment_type</code></td><td><code>employment_type</code></td></tr>
-        <tr><td><code>min_amount</code></td><td><code>job_min_salary</code></td><td><code>salary_min</code></td></tr>
-        <tr><td><code>max_amount</code></td><td><code>job_max_salary</code></td><td><code>salary_max</code></td></tr>
-      </tbody>
-    </table>
-  </section>
-
-
-  <!-- ── Runbook ── -->
-  <section>
-    <h2>Operational Runbook</h2>
-
-    <h3>Check all process status</h3>
-    <pre><code>ssh ubuntu@43.205.129.136 -i ~/Downloads/easyhyrbackend.pem
-pm2 list</code></pre>
-
-    <h3>View live logs</h3>
-    <pre><code># Worker (job processing)
-pm2 logs jsearch-worker --lines 100
-
-# Scraper (Python FastAPI)
-pm2 logs jobspy-scraper --lines 50
-
-# Backend (cron output)
-pm2 logs easyhyr-backend --lines 50</code></pre>
-
-    <h3>Restart after a code deploy</h3>
-    <pre><code>cd /home/ubuntu/easyhyr-backend
-git pull origin master
-npm run build
-pm2 restart jsearch-worker
-pm2 restart easyhyr-backend
-pm2 restart jobspy-scraper    # only if main.py changed</code></pre>
-
-    <h3>Manually trigger a job fetch (bypass cron)</h3>
-    <pre><code># Queue one fetch directly via Redis
-redis-cli lpush 'bull:job-fetch-queue:wait' \
-  '{"name":"fetch-jobs","data":{"query":"react developer","location":"United States"},"opts":{"attempts":3},"timestamp":0,"delay":0,"priority":0}'
-
-# The worker will pick it up automatically within seconds</code></pre>
-
-    <h3>Test the scraper directly</h3>
-    <pre><code>curl "http://localhost:8001/scrape?query=software+engineer&location=United+States" \
-  | python3 -c "import sys,json; d=json.load(sys.stdin); print(len(d),'jobs')"</code></pre>
-
-    <h3>Check queue depth</h3>
-    <pre><code>redis-cli llen 'bull:job-fetch-queue:wait'      # waiting
-redis-cli zcard 'bull:job-fetch-queue:failed'   # failed</code></pre>
-
-    <h3>Clear failed jobs from queue</h3>
-    <pre><code>redis-cli zremrangebyscore 'bull:job-fetch-queue:failed' '-inf' '+inf'</code></pre>
-
-    <h3>Check database job count</h3>
-    <pre><code>cd /home/ubuntu/easyhyr-backend
-node -r module-alias/register -e "
-const { prisma } = require('./dist/lib/prisma');
-prisma.job.count().then(n => { console.log(n, 'jobs'); process.exit(0); });
-"</code></pre>
-  </section>
-
-
-  <!-- ── Known Issues ── -->
-  <section>
-    <h2>Known Issues</h2>
 
     <div class="alert">
       <div class="alert-icon">⚠</div>
       <div class="alert-body">
-        <strong>JSearch API — 429 Rate Limit (Active)</strong><br />
-        The RapidAPI subscription for JSearch has hit its monthly request quota. All JSearch calls return HTTP 429. The pipeline continues to ingest jobs via the JobSpy scraper (Source B). To restore JSearch: log in to RapidAPI, check usage under the JSearch subscription, and upgrade or wait for the monthly reset.
-      </div>
-    </div>
-
-    <div class="alert">
-      <div class="alert-icon">ℹ</div>
-      <div class="alert-body">
-        <strong>Skills table empty</strong><br />
-        The <code>easyhyr_job_skill_tags</code> table has no data. Skill-based job filtering always returns 0 results. Jobs fetched by the scraper do not include structured skill tags — these would need to be extracted via NLP post-processing.
-      </div>
-    </div>
-
-    <div class="alert">
-      <div class="alert-icon">ℹ</div>
-      <div class="alert-body">
-        <strong>Posted-within filter inaccurate</strong><br />
-        The <code>posted_within</code> filter compares against <code>created_at</code> (when the job was stored) rather than the job's original post date. All jobs appear old relative to the filter threshold.
+        <strong>employment_type not normalised</strong>
+        The scraper returns lowercase strings ("fulltime", "parttime", "contract") while JSearch returns title-case ("Full-time", "Part-time", "Contractor"). There are currently 30+ distinct values for what is effectively 5 categories. Filtering by job type on the frontend maps values at query time, but a DB migration to normalise this column would improve filter accuracy.
       </div>
     </div>
   </section>
 
 
-  <!-- ── File Reference ── -->
-  <section>
-    <h2>File Reference</h2>
+  <!-- ══════════════════════════════════════════
+       07 — PM2 PROCESS REGISTRY
+  ══════════════════════════════════════════ -->
+  <section id="s7">
+    <h2>07 &nbsp; PM2 Process Registry</h2>
+    <p>All services on the production server are managed by PM2. The table below reflects the live process list as of June 9, 2026.</p>
+
+    <table>
+      <thead><tr><th>ID</th><th>Name</th><th>Role</th><th>Port</th><th>Uptime</th><th>Restarts</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>0</td><td>easyhyr-backend</td><td>Main API + cron scheduler</td><td>3000</td><td>~7h</td><td>6</td><td><span class="badge badge-solid">Online</span></td></tr>
+        <tr><td>1</td><td>jsearch-worker</td><td>BullMQ worker — job ingestion</td><td>—</td><td>~5m</td><td>2</td><td><span class="badge badge-solid">Online</span></td></tr>
+        <tr><td>2</td><td>jobspy-scraper</td><td>Python FastAPI — web scraper</td><td>8001</td><td>~1m</td><td>1</td><td><span class="badge badge-solid">Online</span></td></tr>
+        <tr><td>3</td><td>job-service</td><td>Job detail API</td><td>3002</td><td>6D</td><td>0</td><td><span class="badge badge-solid">Online</span></td></tr>
+        <tr><td>4</td><td>resume-service</td><td>Resume parsing &amp; storage</td><td>3003</td><td>30h</td><td>1</td><td><span class="badge badge-solid">Online</span></td></tr>
+        <tr><td>5</td><td>api-gateway</td><td>Request routing layer</td><td>—</td><td>6D</td><td>0</td><td><span class="badge badge-solid">Online</span></td></tr>
+        <tr><td>6</td><td>ai-service</td><td>AI / LLM inference</td><td>8000</td><td>18h</td><td>9</td><td><span class="badge badge-solid">Online</span></td></tr>
+        <tr><td>7</td><td>match-service</td><td>Resume–job matching</td><td>8002</td><td>6D</td><td>0</td><td><span class="badge badge-solid">Online</span></td></tr>
+        <tr><td>9</td><td>easyhyr-frontend</td><td>Next.js frontend</td><td>3010</td><td>5h</td><td>3</td><td><span class="badge badge-solid">Online</span></td></tr>
+      </tbody>
+    </table>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════
+       08 — INFRASTRUCTURE
+  ══════════════════════════════════════════ -->
+  <section id="s8">
+    <h2>08 &nbsp; Infrastructure</h2>
+    <table>
+      <thead><tr><th>Component</th><th>Details</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td>Cloud Server</td><td>AWS EC2 — Ubuntu, 43.205.129.136</td><td>Single instance, ap-south-1</td></tr>
+        <tr><td>Process Manager</td><td>PM2</td><td>9 processes, auto-restart on crash</td></tr>
+        <tr><td>Queue</td><td>BullMQ v5 — <code>job-fetch-queue</code></td><td>Backed by Redis</td></tr>
+        <tr><td>Redis</td><td><code>127.0.0.1:6379</code></td><td>Managed by systemd, no auth, no persistence config</td></tr>
+        <tr><td>Database</td><td>PostgreSQL via Prisma ORM</td><td>Table: <code>jobs</code></td></tr>
+        <tr><td>Scraper Runtime</td><td>Python 3.10, FastAPI, uvicorn, jobspy</td><td>venv at <code>scraper-service/venv/</code></td></tr>
+        <tr><td>Worker Runtime</td><td>Node.js 18 — <code>dist/workers/job.worker.js</code></td><td>Runs compiled TypeScript</td></tr>
+        <tr><td>Dedup Strategy</td><td>Upsert on <code>apply_link</code></td><td>Same job URL from two sources counts as one record</td></tr>
+        <tr><td>External API</td><td>RapidAPI — JSearch plan</td><td>Monthly quota; key in <code>.env</code> as <code>RAPID_API_KEY</code></td></tr>
+      </tbody>
+    </table>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════
+       09 — NORMALISATION
+  ══════════════════════════════════════════ -->
+  <section id="s9">
+    <h2>09 &nbsp; Data Normalisation</h2>
+    <p>Both sources return different field shapes. <code>JobNormalizer.service.ts</code> maps them to a unified <code>NormalizedJob</code> before any DB write. The <code>source</code> field (<code>"API"</code> or <code>"SCRAPER"</code>) is preserved for provenance.</p>
+
+    <table>
+      <thead><tr><th>JobSpy Field</th><th>JSearch Field</th><th>DB Column</th><th>Type</th></tr></thead>
+      <tbody>
+        <tr><td><code>title</code></td><td><code>job_title</code></td><td><code>title</code></td><td>String</td></tr>
+        <tr><td><code>company</code></td><td><code>employer_name</code></td><td><code>company</code></td><td>String?</td></tr>
+        <tr><td><code>city</code></td><td><code>job_city</code></td><td><code>city</code></td><td>String?</td></tr>
+        <tr><td><code>country</code></td><td><code>job_country</code></td><td><code>country</code></td><td>String?</td></tr>
+        <tr><td><code>job_url</code></td><td><code>job_apply_link</code></td><td><code>apply_link</code></td><td>String (unique)</td></tr>
+        <tr><td><code>description</code></td><td><code>job_description</code></td><td><code>description</code></td><td>String?</td></tr>
+        <tr><td><code>is_remote</code></td><td><code>job_is_remote</code></td><td><code>is_remote</code></td><td>Boolean</td></tr>
+        <tr><td><code>job_type</code></td><td><code>job_employment_type</code></td><td><code>employment_type</code></td><td>String? (unnormalised)</td></tr>
+        <tr><td><code>min_amount</code></td><td><code>job_min_salary</code></td><td><code>salary_min</code></td><td>Float?</td></tr>
+        <tr><td><code>max_amount</code></td><td><code>job_max_salary</code></td><td><code>salary_max</code></td><td>Float?</td></tr>
+        <tr><td><code>id</code> / <code>job_url</code></td><td><code>job_id</code></td><td><code>external_job_id</code></td><td>String</td></tr>
+        <tr><td><code>"SCRAPER"</code></td><td><code>"API"</code></td><td><code>source</code></td><td>Enum</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════
+       10 — RUNBOOK
+  ══════════════════════════════════════════ -->
+  <section id="s10">
+    <h2>10 &nbsp; Operational Runbook</h2>
+
+    <h3>SSH into server</h3>
+    <pre><code>ssh ubuntu@43.205.129.136 -i ~/Downloads/easyhyrbackend.pem</code></pre>
+
+    <h3>Check all process status</h3>
+    <pre><code>pm2 list</code></pre>
+
+    <h3>View live logs</h3>
+    <pre><code># Worker — job processing output
+pm2 logs jsearch-worker --lines 100
+
+# Scraper — Python FastAPI access log
+pm2 logs jobspy-scraper --lines 50
+
+# Backend — cron + API request log
+pm2 logs easyhyr-backend --lines 50</code></pre>
+
+    <h3>Deploy a code change</h3>
+    <pre><code>cd /home/ubuntu/easyhyr-backend
+git pull origin master
+npm run build
+pm2 restart jsearch-worker        # picks up new dist/workers/
+pm2 restart easyhyr-backend       # picks up new dist/cron/, dist/app.js
+pm2 restart jobspy-scraper        # only needed if scraper-service/main.py changed</code></pre>
+
+    <h3>Manually trigger a job fetch (skip the cron)</h3>
+    <pre><code># Push a job directly onto the BullMQ queue via Redis
+redis-cli lpush 'bull:job-fetch-queue:wait' \
+  '{"name":"fetch-jobs","data":{"query":"react developer","location":"United States"},"opts":{"attempts":3},"timestamp":0,"delay":0,"priority":0}'
+
+# Worker will dequeue and process it within seconds</code></pre>
+
+    <h3>Test the Python scraper directly</h3>
+    <pre><code>curl "http://localhost:8001/scrape?query=software+engineer&location=United+States" \
+  | python3 -c "import sys,json; d=json.load(sys.stdin); print(len(d),'jobs returned')"</code></pre>
+
+    <h3>Check queue depth</h3>
+    <pre><code>redis-cli llen 'bull:job-fetch-queue:wait'      # jobs waiting to be processed
+redis-cli zcard 'bull:job-fetch-queue:failed'   # jobs that errored</code></pre>
+
+    <h3>Clear the failed jobs queue</h3>
+    <pre><code>redis-cli zremrangebyscore 'bull:job-fetch-queue:failed' '-inf' '+inf'</code></pre>
+
+    <h3>Check live DB job count</h3>
+    <pre><code>cd /home/ubuntu/easyhyr-backend
+node -r module-alias/register -e "
+const { prisma } = require('./dist/lib/prisma');
+async function run() {
+  const total = await prisma.job.count();
+  const latest = await prisma.job.findFirst({ orderBy: { created_at: 'desc' }, select: { created_at: true } });
+  console.log(total, 'jobs — latest:', latest?.created_at);
+  process.exit(0);
+}
+run();
+"</code></pre>
+
+    <h3>Restart Redis (if connection refused)</h3>
+    <pre><code>sudo systemctl restart redis-server
+redis-cli ping   # should return PONG</code></pre>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════
+       11 — KNOWN ISSUES
+  ══════════════════════════════════════════ -->
+  <section id="s11">
+    <h2>11 &nbsp; Known Issues</h2>
+
+    <div class="alert">
+      <div class="alert-icon">⚠</div>
+      <div class="alert-body">
+        <strong>JSearch API — HTTP 429 Rate Limit (Active)</strong>
+        The RapidAPI subscription for JSearch has exhausted its monthly request quota. All JSearch calls return 429. The pipeline has been patched to fall through to the scraper on failure, so ingestion continues via JobSpy. To restore JSearch: check usage at rapidapi.com under the JSearch subscription and upgrade the plan or wait for the monthly reset. Once restored, expect ~200 additional jobs per query cycle.
+      </div>
+    </div>
+
+    <div class="alert">
+      <div class="alert-icon">⚠</div>
+      <div class="alert-body">
+        <strong>Google Jobs, Glassdoor &amp; ZipRecruiter — Near-Zero Yield</strong>
+        All five sites are configured in jobspy but current scrapes only return results from Indeed and LinkedIn. This may be due to bot-detection changes on those platforms or regional restrictions. Investigate by running a direct scrape with <code>site_name=["glassdoor"]</code> in isolation.
+      </div>
+    </div>
+
+    <div class="alert">
+      <div class="alert-icon">ℹ</div>
+      <div class="alert-body">
+        <strong>employment_type — 30+ Raw Variants, Not Normalised</strong>
+        Both sources return different string formats for what is effectively 5 categories. The frontend maps these at query time, but the DB stores raw values. A one-time migration + normalisation on write would make filtering more reliable.
+      </div>
+    </div>
+
+    <div class="alert">
+      <div class="alert-icon">ℹ</div>
+      <div class="alert-body">
+        <strong>Skills Table Empty — No Skill-Based Filtering</strong>
+        The <code>easyhyr_job_skill_tags</code> table has no records. The skills filter on the frontend always returns 0 results. Jobs from neither source include structured skill tags; extraction would require NLP post-processing on the description field.
+      </div>
+    </div>
+
+    <div class="alert">
+      <div class="alert-icon">ℹ</div>
+      <div class="alert-body">
+        <strong>posted_within Filter Inaccurate</strong>
+        The filter compares against <code>created_at</code> (DB insert time) rather than the job's original posting date. All jobs appear old relative to any date filter. Fix requires storing the original post date from the source and filtering against that.
+      </div>
+    </div>
+
+    <div class="alert">
+      <div class="alert-icon">ℹ</div>
+      <div class="alert-body">
+        <strong>60% of Jobs Have No Country Code</strong>
+        4,934 records have a null <code>country</code> field. These are primarily JSearch jobs where the geocoding was not returned. Location-based filtering on the frontend uses a broader <code>location</code> text search as a workaround.
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════
+       12 — FILE REFERENCE
+  ══════════════════════════════════════════ -->
+  <section id="s12">
+    <h2>12 &nbsp; File Reference</h2>
     <table>
       <thead><tr><th>File</th><th>Purpose</th></tr></thead>
       <tbody>
-        <tr><td><code>src/cron/job.cron.ts</code></td><td>Cron schedule definition. Edit queries and location here.</td></tr>
-        <tr><td><code>src/queues/job.queue.ts</code></td><td>BullMQ queue instance — <code>job-fetch-queue</code>.</td></tr>
-        <tr><td><code>src/workers/job.worker.ts</code></td><td>BullMQ worker — dequeues and dispatches to aggregator.</td></tr>
-        <tr><td><code>src/service/Shared/job/JobAggregator.service.ts</code></td><td>Orchestrates both sources, normalises, and saves. Resilient to partial failures.</td></tr>
-        <tr><td><code>src/service/Shared/job/JSearch.service.ts</code></td><td>RapidAPI JSearch HTTP client.</td></tr>
-        <tr><td><code>src/service/Shared/job/Scraper.service.ts</code></td><td>HTTP client for the Python scraper at <code>localhost:8001</code>.</td></tr>
-        <tr><td><code>src/service/Shared/job/JobNormalizer.service.ts</code></td><td>Maps raw API/scraper fields to unified DB schema.</td></tr>
-        <tr><td><code>src/service/Shared/job/JobStorage.service.ts</code></td><td>Prisma upsert into <code>jobs</code> table. Deduplicates by <code>apply_link</code>.</td></tr>
-        <tr><td><code>src/service/Shared/job/JobQueue.service.ts</code></td><td>Helper to push a job onto the BullMQ queue.</td></tr>
-        <tr><td><code>scraper-service/main.py</code></td><td>Python FastAPI app. Edit <code>results_wanted</code> and <code>site_name</code> here.</td></tr>
-        <tr><td><code>src/scripts/manual-job-fetch.ts</code></td><td>CLI script for manual testing without going through the queue.</td></tr>
-        <tr><td><code>src/config/redis.ts</code></td><td>Redis connection — hardcoded to <code>127.0.0.1:6379</code>.</td></tr>
-        <tr><td><code>src/EnvConfig.ts</code></td><td>Environment variable registry. <code>RAPID_API_KEY</code> required for JSearch.</td></tr>
+        <tr><td><code>src/cron/job.cron.ts</code></td><td>Cron schedule. Edit <code>QUERIES</code> and <code>DEFAULT_LOCATION</code> to change what is scraped.</td></tr>
+        <tr><td><code>src/queues/job.queue.ts</code></td><td>BullMQ Queue instance — <code>job-fetch-queue</code>.</td></tr>
+        <tr><td><code>src/workers/job.worker.ts</code></td><td>BullMQ Worker. Dequeues jobs, calls aggregator.</td></tr>
+        <tr><td><code>src/service/Shared/job/JobAggregator.service.ts</code></td><td>Orchestrates both sources. Resilient — JSearch failure does not abort the scraper.</td></tr>
+        <tr><td><code>src/service/Shared/job/JSearch.service.ts</code></td><td>RapidAPI JSearch HTTP client. Throws on error; caught by aggregator.</td></tr>
+        <tr><td><code>src/service/Shared/job/Scraper.service.ts</code></td><td>HTTP client calling <code>localhost:8001/scrape</code>. Timeout: 300s.</td></tr>
+        <tr><td><code>src/service/Shared/job/JobNormalizer.service.ts</code></td><td>Maps raw API/scraper fields to unified <code>NormalizedJob</code> schema.</td></tr>
+        <tr><td><code>src/service/Shared/job/JobStorage.service.ts</code></td><td>Prisma upsert into <code>jobs</code> table. Deduplicates on <code>apply_link</code>.</td></tr>
+        <tr><td><code>src/service/Shared/job/JobQueue.service.ts</code></td><td>Helper: push a <code>{ query, location }</code> payload onto the BullMQ queue.</td></tr>
+        <tr><td><code>scraper-service/main.py</code></td><td>FastAPI app. Edit <code>site_name</code>, <code>results_wanted</code>, <code>hours_old</code> here.</td></tr>
+        <tr><td><code>src/scripts/manual-job-fetch.ts</code></td><td>CLI test script. Bypasses queue — calls sources directly. Supports <code>--source</code>, <code>--query</code>, <code>--save</code>.</td></tr>
+        <tr><td><code>src/config/redis.ts</code></td><td>Redis connection config. Hardcoded to <code>127.0.0.1:6379</code>, no auth.</td></tr>
+        <tr><td><code>src/EnvConfig.ts</code></td><td>All environment variables. <code>RAPID_API_KEY</code> required for JSearch.</td></tr>
       </tbody>
     </table>
   </section>
@@ -594,8 +972,8 @@ prisma.job.count().then(n => { console.log(n, 'jobs'); process.exit(0); });
 
   <!-- ── Footer ── -->
   <footer class="doc-footer">
-    <p>EasyHyr Backend — Internal Engineering Documentation</p>
-    <p>Generated June 9, 2026</p>
+    <p>EasyHyr Platform — Internal Engineering Documentation</p>
+    <p>Generated June 9, 2026 &nbsp;·&nbsp; Server 43.205.129.136</p>
   </footer>
 
 </div>
