@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Job Scraper — EasyHyr Technical Reference</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #0a0a0a;
+      --gray-900: #111;
+      --gray-700: #333;
+      --gray-500: #666;
+      --gray-300: #ccc;
+      --gray-100: #f5f5f5;
+      --white: #fff;
+      --border: #e0e0e0;
+    }
+
+    html { font-size: 16px; }
+
+    body {
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-weight: 400;
+      color: var(--gray-900);
+      background: var(--white);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Layout ── */
+    .page {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 80px 40px 120px;
+    }
+
+    /* ── Header ── */
+    .doc-header {
+      border-bottom: 2px solid var(--black);
+      padding-bottom: 28px;
+      margin-bottom: 56px;
+    }
+
+    .doc-header .eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--gray-500);
+      margin-bottom: 10px;
+    }
+
+    .doc-header h1 {
+      font-size: 32px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      color: var(--black);
+      line-height: 1.2;
+      margin-bottom: 12px;
+    }
+
+    .doc-header .subtitle {
+      font-size: 15px;
+      color: var(--gray-500);
+    }
+
+    .meta-row {
+      display: flex;
+      gap: 32px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+
+    .meta-item {
+      font-size: 12px;
+      color: var(--gray-500);
+    }
+
+    .meta-item strong {
+      color: var(--gray-700);
+      font-weight: 600;
+    }
+
+    /* ── Sections ── */
+    section {
+      margin-bottom: 56px;
+    }
+
+    h2 {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--gray-500);
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 8px;
+      margin-bottom: 24px;
+    }
+
+    h3 {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--black);
+      margin-bottom: 8px;
+      margin-top: 24px;
+    }
+
+    h3:first-child { margin-top: 0; }
+
+    p {
+      font-size: 14px;
+      color: var(--gray-700);
+      margin-bottom: 12px;
+    }
+
+    /* ── Status badges ── */
+    .status {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 3px;
+      vertical-align: middle;
+    }
+
+    .status-ok    { background: var(--black); color: var(--white); }
+    .status-warn  { background: var(--gray-300); color: var(--gray-700); }
+    .status-issue { border: 1.5px solid var(--black); color: var(--black); background: var(--white); }
+
+    /* ── Data table ── */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13.5px;
+      margin-bottom: 12px;
+    }
+
+    thead th {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gray-500);
+      border-bottom: 1.5px solid var(--black);
+      padding: 0 12px 10px 0;
+      text-align: left;
+    }
+
+    tbody tr {
+      border-bottom: 1px solid var(--border);
+    }
+
+    tbody tr:last-child { border-bottom: none; }
+
+    tbody td {
+      padding: 11px 12px 11px 0;
+      color: var(--gray-700);
+      vertical-align: top;
+    }
+
+    tbody td:first-child {
+      font-weight: 600;
+      color: var(--black);
+      white-space: nowrap;
+    }
+
+    /* ── Code ── */
+    code {
+      font-family: "SF Mono", "Fira Code", "Courier New", monospace;
+      font-size: 12px;
+      background: var(--gray-100);
+      border: 1px solid var(--border);
+      padding: 2px 6px;
+      border-radius: 3px;
+      color: var(--black);
+    }
+
+    pre {
+      background: var(--gray-100);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--black);
+      padding: 18px 20px;
+      border-radius: 0 4px 4px 0;
+      overflow-x: auto;
+      margin: 16px 0;
+    }
+
+    pre code {
+      background: none;
+      border: none;
+      padding: 0;
+      font-size: 12.5px;
+      line-height: 1.7;
+      color: var(--gray-900);
+    }
+
+    /* ── Flow diagram ── */
+    .flow {
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--black);
+      padding: 20px 24px;
+      background: var(--gray-100);
+      font-family: "SF Mono", "Fira Code", "Courier New", monospace;
+      font-size: 12px;
+      line-height: 2;
+      color: var(--gray-700);
+      margin: 16px 0;
+    }
+
+    .flow .highlight { color: var(--black); font-weight: 700; }
+
+    /* ── Info cards ── */
+    .cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin: 16px 0;
+    }
+
+    @media (max-width: 600px) { .cards { grid-template-columns: 1fr; } }
+
+    .card {
+      border: 1px solid var(--border);
+      padding: 20px;
+    }
+
+    .card-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gray-500);
+      margin-bottom: 6px;
+    }
+
+    .card-value {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--black);
+      letter-spacing: -0.5px;
+      line-height: 1;
+    }
+
+    .card-sub {
+      font-size: 12px;
+      color: var(--gray-500);
+      margin-top: 4px;
+    }
+
+    /* ── PM2 table ── */
+    .pm2-row td:nth-child(3) { font-family: "SF Mono", "Fira Code", monospace; font-size: 11.5px; }
+
+    /* ── Alert box ── */
+    .alert {
+      border: 1.5px solid var(--black);
+      padding: 16px 20px;
+      margin: 16px 0;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+
+    .alert-icon {
+      font-size: 16px;
+      line-height: 1.4;
+      flex-shrink: 0;
+    }
+
+    .alert-body { font-size: 13.5px; color: var(--gray-700); }
+    .alert-body strong { color: var(--black); }
+
+    /* ── List ── */
+    ul, ol {
+      margin-left: 20px;
+      font-size: 14px;
+      color: var(--gray-700);
+      margin-bottom: 12px;
+    }
+
+    li { margin-bottom: 4px; }
+
+    /* ── Footer ── */
+    .doc-footer {
+      border-top: 1px solid var(--border);
+      margin-top: 72px;
+      padding-top: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .doc-footer p {
+      font-size: 12px;
+      color: var(--gray-500);
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ── Header ── -->
+  <header class="doc-header">
+    <div class="eyebrow">EasyHyr Backend — Technical Reference</div>
+    <h1>Job Scraper Pipeline</h1>
+    <p class="subtitle">Architecture, data sources, scheduling, and operational runbook for the automated job ingestion system.</p>
+    <div class="meta-row">
+      <div class="meta-item"><strong>Server</strong> &nbsp;43.205.129.136 (AWS EC2)</div>
+      <div class="meta-item"><strong>Last Updated</strong> &nbsp;June 9, 2026</div>
+      <div class="meta-item"><strong>Jobs in DB</strong> &nbsp;8,240</div>
+      <div class="meta-item"><strong>Oldest Record</strong> &nbsp;April 24, 2026</div>
+    </div>
+  </header>
+
+
+  <!-- ── Stats ── -->
+  <section>
+    <h2>Current Database State</h2>
+    <div class="cards">
+      <div class="card">
+        <div class="card-label">Total Jobs Stored</div>
+        <div class="card-value">8,240</div>
+        <div class="card-sub">Across all sources</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Latest Ingestion</div>
+        <div class="card-value">June 9</div>
+        <div class="card-sub">2026-06-09 at 14:18 UTC</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Data Range</div>
+        <div class="card-value">47 days</div>
+        <div class="card-sub">Apr 24 – Jun 9, 2026</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Cron Frequency</div>
+        <div class="card-value">Hourly</div>
+        <div class="card-sub">Every hour at :00</div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ── Architecture ── -->
+  <section>
+    <h2>Architecture Overview</h2>
+    <p>The pipeline consists of three independent processes managed by PM2. The main backend cron schedules work into a BullMQ queue backed by Redis. The worker dequeues jobs and calls both data sources in parallel.</p>
+
+    <div class="flow">
+<span class="highlight">easyhyr-backend</span>  (PM2 id:0, port 3000)
+  └─ node-cron  »  fires at <span class="highlight">0 * * * *</span>  (every hour, minute zero)
+       └─ addJobToQueue( query, "United States" )  ×3 queries
+            └─ BullMQ  »  <span class="highlight">job-fetch-queue</span>  (Redis 127.0.0.1:6379)
+
+<span class="highlight">jsearch-worker</span>  (PM2 id:1)
+  └─ BullMQ Worker  »  dequeues jobs
+       ├─ [A]  JSearch API  (RapidAPI, HTTPS)
+       │        └─ on 429 / failure  »  log warning, continue ↓
+       └─ [B]  <span class="highlight">jobspy-scraper</span>  (PM2 id:2, localhost:8001)
+                └─ jobspy  »  scrape Indeed · Google · LinkedIn · Glassdoor · ZipRecruiter
+                     └─ normalize  »  saveJobsToDB  (PostgreSQL)
+    </div>
+  </section>
+
+
+  <!-- ── Data Sources ── -->
+  <section>
+    <h2>Data Sources</h2>
+
+    <h3>Source A — JSearch API (RapidAPI) &nbsp;<span class="status status-issue">Rate Limited</span></h3>
+    <p>Programmatic job search API aggregating data from multiple job boards. Called via HTTPS on each worker dequeue.</p>
+    <table>
+      <thead><tr><th>Parameter</th><th>Value</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td>Endpoint</td><td><code>https://jsearch.p.rapidapi.com/search</code></td><td>RapidAPI hosted</td></tr>
+        <tr><td>Auth</td><td><code>RAPID_API_KEY</code> env var</td><td>Set in <code>.env</code> on server</td></tr>
+        <tr><td>Pages per call</td><td><code>num_pages=20</code></td><td>Up to ~200 results</td></tr>
+        <tr><td>Current status</td><td>429 Too Many Requests</td><td>Monthly quota exhausted — needs RapidAPI plan renewal</td></tr>
+        <tr><td>Failure behaviour</td><td>Logs warning, continues to Source B</td><td>Does not abort the pipeline</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Source B — JobSpy Scraper (Python / FastAPI) &nbsp;<span class="status status-ok">Online</span></h3>
+    <p>Local FastAPI service running <code>jobspy</code>. Scrapes live listings from five major job boards per request.</p>
+    <table>
+      <thead><tr><th>Parameter</th><th>Value</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td>Endpoint</td><td><code>http://localhost:8001/scrape</code></td><td>Internal only</td></tr>
+        <tr><td>Sites scraped</td><td>Indeed, Google, LinkedIn, Glassdoor, ZipRecruiter</td><td>All five per call</td></tr>
+        <tr><td>Results wanted</td><td><code>100</code> per site</td><td>Max ~500 jobs per query call</td></tr>
+        <tr><td>Hours old filter</td><td><code>72</code> hours</td><td>Only jobs posted in last 3 days</td></tr>
+        <tr><td>Response time</td><td>~30–60 seconds</td><td>Axios timeout set to 300s (5 min)</td></tr>
+        <tr><td>Auth</td><td>None</td><td>Internal service, not exposed publicly</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+
+  <!-- ── Scheduling ── -->
+  <section>
+    <h2>Scheduling &amp; Queries</h2>
+    <p>The cron job in <code>src/cron/job.cron.ts</code> runs three queries per cycle. Each query is pushed as a separate BullMQ job, processed independently by the worker.</p>
+
+    <table>
+      <thead><tr><th>Query</th><th>Location</th><th>Frequency</th><th>Jobs per run (est.)</th></tr></thead>
+      <tbody>
+        <tr><td>"jobs"</td><td>United States</td><td>Every hour at :00</td><td>~100–500</td></tr>
+        <tr><td>"developer"</td><td>United States</td><td>Every hour at :00</td><td>~100–500</td></tr>
+        <tr><td>"engineer"</td><td>United States</td><td>Every hour at :00</td><td>~100–500</td></tr>
+      </tbody>
+    </table>
+
+    <p>Cron expression: <code>0 * * * *</code> — fires at minute 0 of every hour (00:00, 01:00, 02:00 … UTC).</p>
+
+    <p>To add more queries or change the location, edit <code>src/cron/job.cron.ts</code>:</p>
+    <pre><code>const QUERIES = ["jobs", "developer", "engineer"];  // add terms here
+const DEFAULT_LOCATION = "United States";           // change target region here</code></pre>
+  </section>
+
+
+  <!-- ── PM2 Processes ── -->
+  <section>
+    <h2>PM2 Process Registry</h2>
+    <p>All processes are managed by PM2 on the production server. The table below reflects the state as of June 9, 2026.</p>
+    <table>
+      <thead><tr><th>ID</th><th>Name</th><th>Port</th><th>Uptime</th><th>Restarts</th><th>Status</th></tr></thead>
+      <tbody class="pm2-row">
+        <tr><td>0</td><td>easyhyr-backend</td><td>3000</td><td>~7h</td><td>6</td><td><span class="status status-ok">Online</span></td></tr>
+        <tr><td>1</td><td>jsearch-worker</td><td>—</td><td>~5m</td><td>2</td><td><span class="status status-ok">Online</span></td></tr>
+        <tr><td>2</td><td>jobspy-scraper</td><td>8001</td><td>~1m</td><td>1</td><td><span class="status status-ok">Online</span></td></tr>
+        <tr><td>3</td><td>job-service</td><td>3002</td><td>6D</td><td>0</td><td><span class="status status-ok">Online</span></td></tr>
+        <tr><td>4</td><td>resume-service</td><td>3003</td><td>30h</td><td>1</td><td><span class="status status-ok">Online</span></td></tr>
+        <tr><td>5</td><td>api-gateway</td><td>—</td><td>6D</td><td>0</td><td><span class="status status-ok">Online</span></td></tr>
+        <tr><td>6</td><td>ai-service</td><td>8000</td><td>18h</td><td>9</td><td><span class="status status-ok">Online</span></td></tr>
+        <tr><td>7</td><td>match-service</td><td>8002</td><td>6D</td><td>0</td><td><span class="status status-ok">Online</span></td></tr>
+        <tr><td>9</td><td>easyhyr-frontend</td><td>3010</td><td>5h</td><td>3</td><td><span class="status status-ok">Online</span></td></tr>
+      </tbody>
+    </table>
+  </section>
+
+
+  <!-- ── Infrastructure ── -->
+  <section>
+    <h2>Infrastructure</h2>
+    <table>
+      <thead><tr><th>Component</th><th>Details</th></tr></thead>
+      <tbody>
+        <tr><td>Server</td><td>AWS EC2 — 43.205.129.136 (Ubuntu)</td></tr>
+        <tr><td>Queue</td><td>BullMQ v5 — queue name <code>job-fetch-queue</code></td></tr>
+        <tr><td>Redis</td><td><code>127.0.0.1:6379</code> — managed by systemd, no auth</td></tr>
+        <tr><td>Database</td><td>PostgreSQL via Prisma ORM — table <code>jobs</code></td></tr>
+        <tr><td>Scraper runtime</td><td>Python 3.10, FastAPI, uvicorn, jobspy</td></tr>
+        <tr><td>Worker runtime</td><td>Node.js 18 — <code>dist/workers/job.worker.js</code></td></tr>
+        <tr><td>Dedup strategy</td><td><code>apply_link</code> used as unique key — duplicate URLs are skipped on insert</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+
+  <!-- ── Data Flow Detail ── -->
+  <section>
+    <h2>Data Normalisation</h2>
+    <p>Both sources return different field names. <code>JobNormalizer.service.ts</code> maps both to a unified <code>NormalizedJob</code> shape before DB insertion.</p>
+    <table>
+      <thead><tr><th>Scraper Field</th><th>JSearch Field</th><th>Normalised to</th></tr></thead>
+      <tbody>
+        <tr><td><code>title</code></td><td><code>job_title</code></td><td><code>title</code></td></tr>
+        <tr><td><code>company</code></td><td><code>employer_name</code></td><td><code>company</code></td></tr>
+        <tr><td><code>city</code></td><td><code>job_city</code></td><td><code>city</code></td></tr>
+        <tr><td><code>country</code></td><td><code>job_country</code></td><td><code>country</code></td></tr>
+        <tr><td><code>job_url</code></td><td><code>job_apply_link</code></td><td><code>apply_link</code></td></tr>
+        <tr><td><code>description</code></td><td><code>job_description</code></td><td><code>description</code></td></tr>
+        <tr><td><code>is_remote</code></td><td><code>job_is_remote</code></td><td><code>is_remote</code></td></tr>
+        <tr><td><code>job_type</code></td><td><code>job_employment_type</code></td><td><code>employment_type</code></td></tr>
+        <tr><td><code>min_amount</code></td><td><code>job_min_salary</code></td><td><code>salary_min</code></td></tr>
+        <tr><td><code>max_amount</code></td><td><code>job_max_salary</code></td><td><code>salary_max</code></td></tr>
+      </tbody>
+    </table>
+  </section>
+
+
+  <!-- ── Runbook ── -->
+  <section>
+    <h2>Operational Runbook</h2>
+
+    <h3>Check all process status</h3>
+    <pre><code>ssh ubuntu@43.205.129.136 -i ~/Downloads/easyhyrbackend.pem
+pm2 list</code></pre>
+
+    <h3>View live logs</h3>
+    <pre><code># Worker (job processing)
+pm2 logs jsearch-worker --lines 100
+
+# Scraper (Python FastAPI)
+pm2 logs jobspy-scraper --lines 50
+
+# Backend (cron output)
+pm2 logs easyhyr-backend --lines 50</code></pre>
+
+    <h3>Restart after a code deploy</h3>
+    <pre><code>cd /home/ubuntu/easyhyr-backend
+git pull origin master
+npm run build
+pm2 restart jsearch-worker
+pm2 restart easyhyr-backend
+pm2 restart jobspy-scraper    # only if main.py changed</code></pre>
+
+    <h3>Manually trigger a job fetch (bypass cron)</h3>
+    <pre><code># Queue one fetch directly via Redis
+redis-cli lpush 'bull:job-fetch-queue:wait' \
+  '{"name":"fetch-jobs","data":{"query":"react developer","location":"United States"},"opts":{"attempts":3},"timestamp":0,"delay":0,"priority":0}'
+
+# The worker will pick it up automatically within seconds</code></pre>
+
+    <h3>Test the scraper directly</h3>
+    <pre><code>curl "http://localhost:8001/scrape?query=software+engineer&location=United+States" \
+  | python3 -c "import sys,json; d=json.load(sys.stdin); print(len(d),'jobs')"</code></pre>
+
+    <h3>Check queue depth</h3>
+    <pre><code>redis-cli llen 'bull:job-fetch-queue:wait'      # waiting
+redis-cli zcard 'bull:job-fetch-queue:failed'   # failed</code></pre>
+
+    <h3>Clear failed jobs from queue</h3>
+    <pre><code>redis-cli zremrangebyscore 'bull:job-fetch-queue:failed' '-inf' '+inf'</code></pre>
+
+    <h3>Check database job count</h3>
+    <pre><code>cd /home/ubuntu/easyhyr-backend
+node -r module-alias/register -e "
+const { prisma } = require('./dist/lib/prisma');
+prisma.job.count().then(n => { console.log(n, 'jobs'); process.exit(0); });
+"</code></pre>
+  </section>
+
+
+  <!-- ── Known Issues ── -->
+  <section>
+    <h2>Known Issues</h2>
+
+    <div class="alert">
+      <div class="alert-icon">⚠</div>
+      <div class="alert-body">
+        <strong>JSearch API — 429 Rate Limit (Active)</strong><br />
+        The RapidAPI subscription for JSearch has hit its monthly request quota. All JSearch calls return HTTP 429. The pipeline continues to ingest jobs via the JobSpy scraper (Source B). To restore JSearch: log in to RapidAPI, check usage under the JSearch subscription, and upgrade or wait for the monthly reset.
+      </div>
+    </div>
+
+    <div class="alert">
+      <div class="alert-icon">ℹ</div>
+      <div class="alert-body">
+        <strong>Skills table empty</strong><br />
+        The <code>easyhyr_job_skill_tags</code> table has no data. Skill-based job filtering always returns 0 results. Jobs fetched by the scraper do not include structured skill tags — these would need to be extracted via NLP post-processing.
+      </div>
+    </div>
+
+    <div class="alert">
+      <div class="alert-icon">ℹ</div>
+      <div class="alert-body">
+        <strong>Posted-within filter inaccurate</strong><br />
+        The <code>posted_within</code> filter compares against <code>created_at</code> (when the job was stored) rather than the job's original post date. All jobs appear old relative to the filter threshold.
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ── File Reference ── -->
+  <section>
+    <h2>File Reference</h2>
+    <table>
+      <thead><tr><th>File</th><th>Purpose</th></tr></thead>
+      <tbody>
+        <tr><td><code>src/cron/job.cron.ts</code></td><td>Cron schedule definition. Edit queries and location here.</td></tr>
+        <tr><td><code>src/queues/job.queue.ts</code></td><td>BullMQ queue instance — <code>job-fetch-queue</code>.</td></tr>
+        <tr><td><code>src/workers/job.worker.ts</code></td><td>BullMQ worker — dequeues and dispatches to aggregator.</td></tr>
+        <tr><td><code>src/service/Shared/job/JobAggregator.service.ts</code></td><td>Orchestrates both sources, normalises, and saves. Resilient to partial failures.</td></tr>
+        <tr><td><code>src/service/Shared/job/JSearch.service.ts</code></td><td>RapidAPI JSearch HTTP client.</td></tr>
+        <tr><td><code>src/service/Shared/job/Scraper.service.ts</code></td><td>HTTP client for the Python scraper at <code>localhost:8001</code>.</td></tr>
+        <tr><td><code>src/service/Shared/job/JobNormalizer.service.ts</code></td><td>Maps raw API/scraper fields to unified DB schema.</td></tr>
+        <tr><td><code>src/service/Shared/job/JobStorage.service.ts</code></td><td>Prisma upsert into <code>jobs</code> table. Deduplicates by <code>apply_link</code>.</td></tr>
+        <tr><td><code>src/service/Shared/job/JobQueue.service.ts</code></td><td>Helper to push a job onto the BullMQ queue.</td></tr>
+        <tr><td><code>scraper-service/main.py</code></td><td>Python FastAPI app. Edit <code>results_wanted</code> and <code>site_name</code> here.</td></tr>
+        <tr><td><code>src/scripts/manual-job-fetch.ts</code></td><td>CLI script for manual testing without going through the queue.</td></tr>
+        <tr><td><code>src/config/redis.ts</code></td><td>Redis connection — hardcoded to <code>127.0.0.1:6379</code>.</td></tr>
+        <tr><td><code>src/EnvConfig.ts</code></td><td>Environment variable registry. <code>RAPID_API_KEY</code> required for JSearch.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+
+  <!-- ── Footer ── -->
+  <footer class="doc-footer">
+    <p>EasyHyr Backend — Internal Engineering Documentation</p>
+    <p>Generated June 9, 2026</p>
+  </footer>
+
+</div>
+</body>
+</html>
